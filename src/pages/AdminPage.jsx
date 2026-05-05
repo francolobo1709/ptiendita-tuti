@@ -59,15 +59,15 @@ export default function AdminPage() {
   ]
 
   return (
-    <div className="min-h-screen bg-pink-50">
+    <div className="min-h-screen bg-grayMinimal-50">
 
       {/* ── Header ── */}
-      <header className="bg-white border-b border-pink-100 sticky top-0 z-30 shadow-sm">
+      <header className="bg-white border-b border-grayMinimal-100 sticky top-0 z-30 shadow-sm">
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
 
           {/* Logo + tabs */}
           <div className="flex items-center gap-5 min-w-0">
-            <h1 className="text-lg font-bold text-pink-500 shrink-0">Panel Admin</h1>
+            <h1 className="text-lg font-bold text-accent shrink-0">Panel Admin</h1>
             <nav className="flex items-center gap-1">
               {TABS.map(({ id, label, Icon }) => (
                 <button
@@ -75,7 +75,7 @@ export default function AdminPage() {
                   onClick={() => setTab(id)}
                   className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-semibold transition-all duration-200 ${
                     tab === id
-                      ? 'bg-pink-100 text-pink-600'
+                      ? 'bg-grayMinimal-100 text-grayMinimal-600'
                       : 'text-gray-500 hover:bg-gray-100'
                   }`}
                 >
@@ -155,7 +155,7 @@ export default function AdminPage() {
 
               {!loading && products.length === 0 && (
                 <div className="py-16 text-center text-gray-400">
-                  <PackageX size={48} className="mx-auto mb-3 text-pink-200" />
+                  <PackageX size={48} className="mx-auto mb-3 text-grayMinimal-300" />
                   <p>No hay productos. ¡Crea el primero!</p>
                 </div>
               )}
@@ -163,7 +163,7 @@ export default function AdminPage() {
               {!loading && products.length > 0 && (
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
-                    <thead className="bg-pink-50 text-left">
+                    <thead className="bg-grayMinimal-50 text-left">
                       <tr>
                         <th className="px-4 py-3 font-semibold text-gray-600">Producto</th>
                         <th className="px-4 py-3 font-semibold text-gray-600">Precio</th>
@@ -174,7 +174,7 @@ export default function AdminPage() {
                     </thead>
                     <tbody className="divide-y divide-gray-100">
                       {products.map((p) => (
-                        <tr key={p.id} className="hover:bg-pink-50/50 transition-colors">
+                        <tr key={p.id} className="hover:bg-grayMinimal-50/50 transition-colors">
                           <td className="px-4 py-3">
                             <div className="flex items-center gap-3">
                               {p.imageUrl ? (
@@ -184,14 +184,14 @@ export default function AdminPage() {
                                   className="w-10 h-10 rounded-lg object-cover shrink-0"
                                 />
                               ) : (
-                                <div className="w-10 h-10 rounded-lg bg-pink-100 flex items-center justify-center text-pink-300 shrink-0">
+                                <div className="w-10 h-10 rounded-lg bg-grayMinimal-100 flex items-center justify-center text-grayMinimal-400 shrink-0">
                                   ?
                                 </div>
                               )}
                               <span className="font-medium text-gray-800 line-clamp-1">{p.name}</span>
                             </div>
                           </td>
-                          <td className="px-4 py-3 text-pink-600 font-semibold">
+                          <td className="px-4 py-3 text-accent font-semibold">
                             ${Number(p.price).toLocaleString('es-AR')}
                           </td>
                           <td className="px-4 py-3">

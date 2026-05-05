@@ -18,7 +18,7 @@ export default function CheckoutPage() {
     return (
       <Layout>
         <div className="max-w-md mx-auto text-center py-20 space-y-4">
-          <ShoppingBag size={56} className="mx-auto text-pink-200" />
+          <ShoppingBag size={56} className="mx-auto text-grayMinimal-300" />
           <h1 className="text-xl font-bold text-gray-700">Tu carrito está vacío</h1>
           <button onClick={() => navigate('/')} className="btn-primary">
             Ver productos
@@ -70,7 +70,7 @@ export default function CheckoutPage() {
       <div className="max-w-2xl mx-auto space-y-6">
         <button
           onClick={() => navigate('/')}
-          className="flex items-center gap-2 text-sm text-gray-500 hover:text-pink-500 transition-colors"
+          className="flex items-center gap-2 text-sm text-gray-500 hover:text-accent transition-colors"
         >
           <ArrowLeft size={16} />
           Volver a la tienda
@@ -93,14 +93,14 @@ export default function CheckoutPage() {
                 <p className="font-semibold text-gray-800">{item.name}</p>
                 <p className="text-sm text-gray-400">Cantidad: {item.quantity}</p>
               </div>
-              <span className="font-bold text-pink-500">
+              <span className="font-bold text-accent">
                 ${(item.price * item.quantity).toLocaleString('es-AR')}
               </span>
             </div>
           ))}
           <div className="flex justify-between items-center pt-2 font-bold text-lg">
             <span>Total</span>
-            <span className="text-pink-600">${total.toLocaleString('es-AR')}</span>
+            <span className="text-accent">${total.toLocaleString('es-AR')}</span>
           </div>
         </div>
 

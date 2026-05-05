@@ -107,7 +107,7 @@ export default function ProductForm({ product = null, onSuccess }) {
         <div
           onClick={() => fileInputRef.current?.click()}
           className={`relative border-2 border-dashed rounded-2xl overflow-hidden cursor-pointer transition-colors ${
-            imagePreview ? 'border-pink-300' : 'border-gray-300 hover:border-pink-300'
+            imagePreview ? 'border-grayMinimal-300' : 'border-gray-300 hover:border-grayMinimal-300'
           }`}
         >
           {imagePreview ? (
@@ -123,7 +123,7 @@ export default function ProductForm({ product = null, onSuccess }) {
             </div>
           ) : (
             <div className="h-36 flex flex-col items-center justify-center gap-2 text-gray-400">
-              <Upload size={28} className="text-pink-300" />
+              <Upload size={28} className="text-grayMinimal-400" />
               <span className="text-sm">Click para subir imagen</span>
               <span className="text-xs">PNG, JPG, WEBP • máx. 5MB</span>
             </div>
@@ -139,7 +139,7 @@ export default function ProductForm({ product = null, onSuccess }) {
         {uploadProgress > 0 && uploadProgress < 100 && (
           <div className="w-full bg-gray-200 rounded-full h-1.5">
             <div
-              className="bg-pink-400 h-1.5 rounded-full transition-all"
+              className="bg-accent h-1.5 rounded-full transition-all"
               style={{ width: `${uploadProgress}%` }}
             />
           </div>

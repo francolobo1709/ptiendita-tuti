@@ -95,8 +95,8 @@ const STAT_CARDS = [
     label: 'Unidades vendidas',
     value: totalSales,
     icon: ShoppingBag,
-    bg: 'bg-pink-100',
-    color: 'text-pink-500',
+    bg: 'bg-grayMinimal-100',
+    color: 'text-grayMinimal-500',
     note: 'Últimos 30 días',
   },
   {
@@ -162,9 +162,9 @@ export default function AdminMetrics() {
                   <span className="text-sm font-bold text-gray-600">{p.sales} uds.</span>
                 </div>
               </div>
-              <div className="bg-pink-100 rounded-full h-2 overflow-hidden">
+              <div className="bg-grayMinimal-100 rounded-full h-2 overflow-hidden">
                 <div
-                  className="bg-gradient-to-r from-pink-500 to-pink-300 h-2 rounded-full"
+                  className="bg-gradient-to-r from-accent to-grayMinimal-400 h-2 rounded-full"
                   style={{ width: `${(p.sales / maxSales) * 100}%` }}
                 />
               </div>
@@ -183,7 +183,7 @@ export default function AdminMetrics() {
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
-            <thead className="bg-pink-50">
+            <thead className="bg-grayMinimal-50">
               <tr>
                 <th className="px-4 py-3 text-left font-semibold text-gray-600">Producto</th>
                 <th className="px-4 py-3 text-right font-semibold text-gray-600">Precio</th>
@@ -196,7 +196,7 @@ export default function AdminMetrics() {
             </thead>
             <tbody className="divide-y divide-gray-100">
               {DEMO_METRICS.map((p) => (
-                <tr key={p.id} className="hover:bg-pink-50/50 transition-colors">
+                <tr key={p.id} className="hover:bg-grayMinimal-50/50 transition-colors">
                   <td className="px-4 py-3">
                     <p className="font-medium text-gray-800">{p.name}</p>
                     <p className="text-xs text-gray-400">{p.category}</p>
@@ -204,7 +204,7 @@ export default function AdminMetrics() {
                   <td className="px-4 py-3 text-right text-gray-700">
                     ${p.price.toLocaleString('es-AR')}
                   </td>
-                  <td className="px-4 py-3 text-right font-bold text-pink-600">{p.sales}</td>
+                  <td className="px-4 py-3 text-right font-bold text-accent">{p.sales}</td>
                   <td className="px-4 py-3 text-right font-bold text-emerald-600">
                     ${p.revenue.toLocaleString('es-AR')}
                   </td>

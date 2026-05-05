@@ -9,6 +9,20 @@
 export async function createMercadoPagoPreference(items, buyerEmail) {
   const backendUrl = import.meta.env.VITE_BACKEND_URL
 
+  if (!backendUrl) {
+    throw new Error(
+      'VITE_BACKEND_URL no está configurado. Revisá el archivo .env del proyecto.'
+    )
+  }
+
+  if (!Array.isArray(items) || items.length === 0) {
+    throw new Error('El carrito está vacío.')
+  }
+
+  if (!buyerEmail || !buyerEmail.includes('@')) {
+    throw new Error('Email inválido. Ingresá un email correcto para continuar.')
+  }
+
   const response = await fetch(`${backendUrl}/create-preference`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },

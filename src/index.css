@@ -13,8 +13,8 @@
 
   body {
     font-family: 'Inter', system-ui, sans-serif;
-    background-color: #fff0f6;
-    color: #1f2937;
+    background-color: #F5F5F5;
+    color: #1F1F1F;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -28,19 +28,19 @@
 
 @layer components {
   .btn-primary {
-    @apply bg-pink-400 hover:bg-pink-500 text-white font-semibold py-2 px-5 rounded-full transition-all duration-200 shadow-sm hover:shadow-md active:scale-95;
+    @apply bg-accent hover:bg-accent-hover text-white font-semibold py-2 px-5 rounded-full transition-all duration-200 shadow-sm hover:shadow-md active:scale-95;
   }
 
   .btn-secondary {
-    @apply bg-white border-2 border-pink-400 text-pink-500 font-semibold py-2 px-5 rounded-full transition-all duration-200 hover:bg-pink-50 active:scale-95;
+    @apply bg-white border-2 border-grayMinimal-300 text-grayMinimal-600 font-semibold py-2 px-5 rounded-full transition-all duration-200 hover:bg-grayMinimal-50 active:scale-95;
   }
 
   .btn-ghost {
-    @apply text-pink-500 font-semibold py-2 px-4 rounded-full transition-all duration-200 hover:bg-pink-50 active:scale-95;
+    @apply text-grayMinimal-500 font-semibold py-2 px-4 rounded-full transition-all duration-200 hover:bg-grayMinimal-100 active:scale-95;
   }
 
   .input-field {
-    @apply w-full border border-gray-300 rounded-xl px-4 py-2.5 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-300 focus:border-pink-400 transition-all duration-200;
+    @apply w-full border border-grayMinimal-200 rounded-xl px-4 py-2.5 text-grayMinimal-800 placeholder-grayMinimal-300 focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent transition-all duration-200;
   }
 
   .card {

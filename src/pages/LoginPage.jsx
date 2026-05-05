@@ -43,14 +43,14 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 bg-gradient-to-br from-pink-50 to-pastel-lavender/30">
+    <div className="min-h-screen flex items-center justify-center px-4 bg-gradient-to-br from-grayMinimal-50 to-grayMinimal-100">
       <div className="w-full max-w-md">
         {/* Card */}
         <div className="card p-8 space-y-6">
           {/* Logo */}
           <div className="text-center space-y-2">
-            <div className="inline-flex items-center justify-center w-14 h-14 bg-pink-100 rounded-full">
-              <Heart size={28} className="text-pink-400 fill-pink-300" />
+            <div className="inline-flex items-center justify-center w-14 h-14 bg-grayMinimal-100 rounded-full">
+              <Heart size={28} className="text-accent fill-accent" />
             </div>
             <h1 className="text-2xl font-bold text-gray-800">Tiendita Tuti</h1>
             <p className="text-gray-500 text-sm">Panel de Administración</p>

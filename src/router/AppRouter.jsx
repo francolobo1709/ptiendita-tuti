@@ -1,11 +1,12 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { ProtectedRoute } from './ProtectedRoute'
 
-import StorePage    from '../pages/StorePage'
-import LoginPage    from '../pages/LoginPage'
-import AdminPage    from '../pages/AdminPage'
-import CheckoutPage from '../pages/CheckoutPage'
-import NotFoundPage from '../pages/NotFoundPage'
+import StorePage          from '../pages/StorePage'
+import LoginPage          from '../pages/LoginPage'
+import AdminPage          from '../pages/AdminPage'
+import CheckoutPage       from '../pages/CheckoutPage'
+import PaymentStatusPage  from '../pages/PaymentStatusPage'
+import NotFoundPage       from '../pages/NotFoundPage'
 
 export default function AppRouter() {
   return (
@@ -14,6 +15,7 @@ export default function AppRouter() {
         {/* Rutas públicas */}
         <Route path="/"        element={<StorePage />} />
         <Route path="/checkout" element={<CheckoutPage />} />
+        <Route path="/pago"    element={<PaymentStatusPage />} />
 
         {/* Auth */}
         <Route path="/login"       element={<LoginPage />} />
