@@ -1,26 +1,13 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { ShoppingCart, Heart, LogOut, Settings } from 'lucide-react'
 import { useCart } from '../../context/CartContext'
 import { useAuth } from '../../context/AuthContext'
-import { logout } from '../../services/authService'
-import toast from 'react-hot-toast'
+import { useLogout } from '../../hooks/useLogout'
 
 export default function Navbar() {
   const { count, setIsOpen } = useCart()
-  const { user, isAdmin, demoMode, exitDemoMode } = useAuth()
-  const navigate             = useNavigate()
-
-  async function handleLogout() {
-    if (demoMode) {
-      exitDemoMode()
-      toast.success('Sesión demo cerrada')
-      navigate('/')
-      return
-    }
-    await logout()
-    toast.success('Sesión cerrada')
-    navigate('/')
-  }
+  const { user, isAdmin, demoMode } = useAuth()
+  const handleLogout = useLogout()
 
   return (
     <header className="sticky top-0 z-40 bg-white/90 backdrop-blur border-b border-grayMinimal-100 shadow-sm">

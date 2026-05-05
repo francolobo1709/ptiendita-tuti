@@ -113,12 +113,15 @@ export default function StorePage() {
         {/* Valores */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {VALORES.map(({ icon: Icon, title, desc }) => (
-            <div key={title} className="card p-5 space-y-3">
-              <div className="w-10 h-10 rounded-xl bg-grayMinimal-100 flex items-center justify-center">
-                <Icon size={20} className="text-grayMinimal-600" />
+            <div
+              key={title}
+              className="group card p-5 space-y-3 hover:bg-grayMinimal-100 active:bg-grayMinimal-100 transition-colors duration-200 cursor-default"
+            >
+              <div className="w-10 h-10 rounded-xl bg-grayMinimal-100 group-hover:bg-grayMinimal-200 group-active:bg-grayMinimal-200 flex items-center justify-center transition-colors duration-200">
+                <Icon size={20} className="text-grayMinimal-600 group-hover:text-grayMinimal-800 transition-colors duration-200" />
               </div>
               <h3 className="font-bold text-grayMinimal-800 text-sm">{title}</h3>
-              <p className="text-grayMinimal-500 text-xs leading-relaxed">{desc}</p>
+              <p className="text-grayMinimal-500 group-hover:text-grayMinimal-700 text-xs leading-relaxed transition-colors duration-200">{desc}</p>
             </div>
           ))}
         </div>

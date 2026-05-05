@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { Heart, Mail, Lock, Eye, EyeOff, FlaskConical } from 'lucide-react'
 import { login } from '../services/authService'
@@ -16,11 +16,9 @@ export default function LoginPage() {
   const { user, enterDemoMode }  = useAuth()
   const from      = location.state?.from?.pathname ?? '/admin'
 
-  // Si ya está logueado, redirigir
-  if (user) {
-    navigate(from, { replace: true })
-    return null
-  }
+  useEffect(() => {
+    if (user) navigate(from, { replace: true })
+  }, [user, navigate, from])
 
   async function handleSubmit(e) {
     e.preventDefault()
@@ -105,33 +103,39 @@ export default function LoginPage() {
             </button>
           </form>
 
-          {/* Divisor */}
-          <div className="relative">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-gray-200" />
+          {/* Divisor + demo — solo visibles en desarrollo */}
+          {import.meta.env.DEV && (
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-gray-200" />
+              </div>
+              <div className="relative flex justify-center">
+                <span className="bg-white px-3 text-xs text-gray-400 uppercase tracking-wider">o bien</span>
+              </div>
             </div>
-            <div className="relative flex justify-center">
-              <span className="bg-white px-3 text-xs text-gray-400 uppercase tracking-wider">o bien</span>
-            </div>
-          </div>
+          )}
 
-          {/* Botón demo */}
-          <button
-            type="button"
-            onClick={handleDemoLogin}
-            className="btn-secondary w-full flex items-center justify-center gap-2 py-3"
-          >
-            <FlaskConical size={16} />
-            Ingresar en modo demo
-          </button>
+          {/* Botón demo — solo visible en desarrollo */}
+          {import.meta.env.DEV && (
+            <>
+              <button
+                type="button"
+                onClick={handleDemoLogin}
+                className="btn-secondary w-full flex items-center justify-center gap-2 py-3"
+              >
+                <FlaskConical size={16} />
+                Ingresar en modo demo
+              </button>
 
-          {/* Credenciales de prueba */}
-          <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 text-xs text-amber-800 space-y-1.5">
-            <p className="font-bold text-amber-900">🔑 Credenciales de prueba (Firebase):</p>
-            <p>Email: <code className="bg-amber-100 px-1.5 py-0.5 rounded font-mono">admin@tiendita.com</code></p>
-            <p>Contraseña: <code className="bg-amber-100 px-1.5 py-0.5 rounded font-mono">Admin123!</code></p>
-            <p className="text-amber-600 text-[11px] pt-1">El modo demo no requiere Firebase y activa métricas de ejemplo.</p>
-          </div>
+              {/* Credenciales de prueba */}
+              <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 text-xs text-amber-800 space-y-1.5">
+                <p className="font-bold text-amber-900">🔑 Credenciales de prueba (Firebase):</p>
+                <p>Email: <code className="bg-amber-100 px-1.5 py-0.5 rounded font-mono">admin@tiendita.com</code></p>
+                <p>Contraseña: <code className="bg-amber-100 px-1.5 py-0.5 rounded font-mono">Admin123!</code></p>
+                <p className="text-amber-600 text-[11px] pt-1">El modo demo no requiere Firebase y activa métricas de ejemplo.</p>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>

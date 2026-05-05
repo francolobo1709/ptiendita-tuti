@@ -1,8 +1,11 @@
+import { auth } from './firebase'
+
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 
 /**
  * Pide una firma al backend y sube la imagen directo a Cloudinary.
  * El API Secret NUNCA toca el navegador.
+ * Requiere que el usuario esté autenticado como admin (token verificado server-side).
  *
  * @param {File}     file        - Archivo de imagen a subir
  * @param {Function} onProgress  - Callback con porcentaje 0-100 (usa XHR)
@@ -13,20 +16,28 @@ export async function uploadProductImage(file, onProgress) {
     throw new Error('VITE_BACKEND_URL no configurado.')
   }
 
-  // 1️⃣  Pedir firma al backend
-  const signRes = await fetch(`${BACKEND_URL}/sign-upload`, { method: 'POST' })
+  // 🔒 Obtener el ID token del admin autenticado para enviarlo al backend
+  const currentUser = auth.currentUser
+  if (!currentUser) throw new Error('No autenticado. Iniciá sesión para subir imágenes.')
+  const idToken = await currentUser.getIdToken()
+
+  // 1️⃣  Pedir firma al backend con el token de autenticación
+  const signRes = await fetch(`${BACKEND_URL}/sign-upload`, {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${idToken}` },
+  })
   if (!signRes.ok) throw new Error('No se pudo obtener la firma de Cloudinary')
-  const { timestamp, signature, apiKey, cloudName, folder } = await signRes.json()
+  const { timestamp, signature, apiKey, cloudName, folder, transformation } = await signRes.json()
 
   // 2️⃣  Construir FormData para el upload directo
   const form = new FormData()
-  form.append('file',      file)
-  form.append('timestamp', timestamp)
-  form.append('signature', signature)
-  form.append('api_key',   apiKey)
-  form.append('folder',    folder)
-  // Transformación automática: entregar WebP, máx 800px ancho, calidad auto
-  form.append('transformation', 'q_auto,f_auto,w_800,c_limit')
+  form.append('file',           file)
+  form.append('timestamp',      timestamp)
+  form.append('signature',      signature)
+  form.append('api_key',        apiKey)
+  form.append('folder',         folder)
+  // Transformación firmada server-side: WebP, máx 800px ancho, calidad auto
+  if (transformation) form.append('transformation', transformation)
 
   // 3️⃣  Subir con XHR para tener progreso real
   const uploadUrl = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`

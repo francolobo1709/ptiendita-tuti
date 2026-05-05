@@ -10,7 +10,7 @@ export function AuthProvider({ children }) {
   const [role, setRole]                 = useState(null)
   const [loading, setLoading]           = useState(true)
   const [demoMode, setDemoMode]         = useState(
-    () => sessionStorage.getItem('demo_admin') === 'true'
+    () => import.meta.env.DEV && sessionStorage.getItem('demo_admin') === 'true'
   )
 
   useEffect(() => {
@@ -33,6 +33,7 @@ export function AuthProvider({ children }) {
   }, [demoMode])
 
   function enterDemoMode() {
+    if (!import.meta.env.DEV) return
     sessionStorage.setItem('demo_admin', 'true')
     setDemoMode(true)
   }

@@ -10,8 +10,11 @@ export function CartProvider({ children }) {
     setItems((prev) => {
       const existing = prev.find((i) => i.id === product.id)
       if (existing) {
+        const newQty = existing.quantity + 1
+        // No superar el stock disponible
+        if (product.stock > 0 && newQty > product.stock) return prev
         return prev.map((i) =>
-          i.id === product.id ? { ...i, quantity: i.quantity + 1 } : i
+          i.id === product.id ? { ...i, quantity: newQty } : i
         )
       }
       return [...prev, { ...product, quantity: 1 }]
@@ -29,7 +32,12 @@ export function CartProvider({ children }) {
       return
     }
     setItems((prev) =>
-      prev.map((i) => (i.id === productId ? { ...i, quantity } : i))
+      prev.map((i) => {
+        if (i.id !== productId) return i
+        // Respetar el stock que se guardó al agregar el producto
+        const maxQty = i.stock > 0 ? i.stock : quantity
+        return { ...i, quantity: Math.min(quantity, maxQty) }
+      })
     )
   }, [])
 

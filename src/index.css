@@ -17,6 +17,8 @@
     color: #1F1F1F;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    /* Safe area para notch/home bar de iOS */
+    padding-bottom: env(safe-area-inset-bottom, 0px);
   }
 
   #root {

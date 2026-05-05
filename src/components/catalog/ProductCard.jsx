@@ -42,11 +42,11 @@ export default function ProductCard({ product }) {
           </div>
         )}
 
-        {/* Botón "Ver descripción" — aparece en hover o siempre en mobile */}
+        {/* Botón "Ver descripción" — siempre visible en mobile, solo en hover en desktop */}
         {description && !showDesc && (
           <button
             onClick={() => setShowDesc(true)}
-            className="absolute bottom-2 right-2 bg-white/90 backdrop-blur-sm text-accent text-[11px] font-semibold px-2.5 py-1.5 rounded-full shadow-md hover:bg-white hover:scale-105 transition-all duration-200 flex items-center gap-1 opacity-0 group-hover:opacity-100 sm:opacity-100"
+            className="absolute bottom-2 right-2 bg-white/90 backdrop-blur-sm text-accent text-[11px] font-semibold px-2.5 py-1.5 rounded-full shadow-md hover:bg-white hover:scale-105 transition-all duration-200 flex items-center gap-1 sm:opacity-0 sm:group-hover:opacity-100"
           >
             <Info size={11} />
             Ver más

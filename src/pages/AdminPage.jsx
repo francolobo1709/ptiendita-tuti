@@ -5,9 +5,8 @@ import ProductForm from '../components/admin/ProductForm'
 import LoadingSpinner from '../components/ui/LoadingSpinner'
 import { useProducts } from '../hooks/useProducts'
 import { deleteProduct } from '../services/productService'
-import { logout } from '../services/authService'
 import { useAuth } from '../context/AuthContext'
-import { useNavigate } from 'react-router-dom'
+import { useLogout } from '../hooks/useLogout'
 import toast from 'react-hot-toast'
 
 export default function AdminPage() {
@@ -15,8 +14,8 @@ export default function AdminPage() {
   const [showForm, setShowForm]        = useState(false)
   const [editTarget, setEditTarget]    = useState(null)
   const [tab, setTab]                  = useState('metricas')
-  const navigate                       = useNavigate()
-  const { demoMode, exitDemoMode }     = useAuth()
+  const { demoMode }                   = useAuth()
+  const handleLogout                   = useLogout()
 
   async function handleDelete(product) {
     if (!window.confirm(`¿Eliminar "${product.name}"?`)) return
@@ -39,18 +38,6 @@ export default function AdminPage() {
     setShowForm(false)
     setEditTarget(null)
     refetch()
-  }
-
-  async function handleLogout() {
-    if (demoMode) {
-      exitDemoMode()
-      toast.success('Sesión demo cerrada')
-      navigate('/')
-      return
-    }
-    await logout()
-    toast.success('Sesión cerrada')
-    navigate('/')
   }
 
   const TABS = [
@@ -114,7 +101,7 @@ export default function AdminPage() {
           <div className="bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 text-sm text-amber-800 flex items-start gap-2">
             <span className="text-base leading-tight mt-0.5">🧪</span>
             <span>
-              <strong>Modo Demo activo</strong> — Las métricas son ficticias. La gestión de productos está conectada a Firebase real.
+              <strong>Modo Demo activo</strong> — Estás navegando sin cuenta real. La gestión de productos y las métricas están conectadas a Firebase en vivo.
             </span>
           </div>
         )}
